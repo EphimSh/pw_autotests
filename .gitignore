@@ -1,0 +1,13 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Homework and tasks description
+task.md
+lection*
+test-list.spec.ts
