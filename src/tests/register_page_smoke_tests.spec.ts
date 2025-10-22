@@ -8,7 +8,7 @@ import { URL } from "test-data/consts/url/Url";
 
 test.describe("[SMOKE]", () => {
   test.describe("[REGISTER-FORM]", () => {
-    test(`При клике на кнопку Register заголовок формы меняется на Registration`, async ({
+    test(`Registration form header switches its text when click on Register button`, async ({
       page,
     }) => {
       const registerFormHeader = page.locator("h2#registerForm");
@@ -20,8 +20,7 @@ test.describe("[SMOKE]", () => {
       await expect(registerFormHeader).toHaveText("Registration");
     });
 
-    test(`При регистрации только с введеным значением login появляется сообщение об ошибке 
-    ${ERROR_MESSAGE.PASSWORD_REQUIRED}`, async ({ page }) => {
+    test(`Error message appears '${ERROR_MESSAGE.PASSWORD_REQUIRED}' when register without password`, async ({ page }) => {
       const errorMessage = page.locator("#errorMessageOnRegister");
       const userNameInput = page.locator("#userNameOnRegister");
       const switchToRegisterButton = page.locator(".button#registerOnLogin");
@@ -35,8 +34,7 @@ test.describe("[SMOKE]", () => {
       await expect(errorMessage).toHaveText(ERROR_MESSAGE.PASSWORD_REQUIRED);
     });
 
-    test(`При регистрации с валидными данными появляется сообщение -  
-        ${SUCCESS_MESSAGE.REGISTER_SUCCESS}`, async ({ page }) => {
+    test(`Success message appears '${SUCCESS_MESSAGE.REGISTER_SUCCESS}' when register with valid data`, async ({ page }) => {
       const errorMessage = page.locator("#errorMessageOnRegister");
       const userNameInput = page.locator("#userNameOnRegister");
       const userPasswordInput = page.locator("#passwordOnRegister");
@@ -53,7 +51,7 @@ test.describe("[SMOKE]", () => {
     });
   });
   test.describe("[LOGIN-FORM]", () => {
-    test(`При успешной авторизации появляется сообщение - ${SUCCESS_MESSAGE.LOGIN_SUCCESS} ${testPerson.firstName}!`, async ({
+    test(`Success message appears '${SUCCESS_MESSAGE.LOGIN_SUCCESS} ${testPerson.firstName}!' when login with valid data`, async ({
       page,
     }) => {
       const backButton = await page.locator(".button#backOnRegister");
