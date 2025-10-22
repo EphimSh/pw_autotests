@@ -1,6 +1,5 @@
 import test, { expect } from "@playwright/test";
 import { URL } from "../test-data/consts/url/Url";
-import { testPerson } from "test-data/consts/Person";
 import { SUCCESS_MESSAGE } from "test-data/consts/notifications/Notifications";
 
 test.describe("[DEMO-LOGIN-FORM] [LOCALSTORAGE-MANIPULATION]", () => {
@@ -13,7 +12,7 @@ test.describe("[DEMO-LOGIN-FORM] [LOCALSTORAGE-MANIPULATION]", () => {
       email: "test@gmail.com",
       password: "SecretPw123!@#",
     };
-    await page.goto(`${URL.DEMO_LOGIN_BASE_URL}/demo-login-form/`);
+    await page.goto(`${URL.BASE_URL}/demo-login-form/`);
     await page.evaluate((testdata) => {
       localStorage.setItem(
         testdata.email,
