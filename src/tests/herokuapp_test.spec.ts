@@ -3,7 +3,7 @@ import { URL } from "../test-data/consts/url/Url";
 
 test.describe("[HEROKU] [DYNAMIC CONTROLS] [WAITS]", () => {
   test("", async ({ page }) => {
-    await test.step("Открыть the-internet.herokuapp.com", async () => {
+    await test.step("Go to the-internet.herokuapp.com", async () => {
       await page.goto(`${URL.HEROKU_APP_BASE_URL}`);
     });
     const dynamicControlsLink = page.locator('a[href="/dynamic_controls"]');
@@ -13,11 +13,11 @@ test.describe("[HEROKU] [DYNAMIC CONTROLS] [WAITS]", () => {
     const addButton = page.getByRole("button", { name: "Add" });
     const message = page.locator("#message");
 
-    dynamicControlsLink.click();
+    await dynamicControlsLink.click();
     await expect(removeButton).toBeVisible();
     await expect(pageMainHeader).toHaveText("Dynamic Controls");
-    checkBox.click();
-    removeButton.click();
+    await checkBox.click();
+    await removeButton.click();
     await checkBox.waitFor({ state: "hidden" });
     await addButton.waitFor({ state: "visible" });
     await expect(message).toHaveText("It's gone!");
