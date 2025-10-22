@@ -1,7 +1,7 @@
 enum ERROR_MESSAGE {
   NO_CREDS_PROVIDED = "Credentials are required",
   INVALID_CREDENTIALS = "Invalid credentials",
-  VALID_DATA_PROVIDE = "Please, provide valid data",
+  PROVIDE_VALID_DATA = "Please, provide valid data",
   SHOULD_CONTAIN_EIGHT_CHARACTERS = "Password should contain at least 8 characters",
   PASSWORD_REQUIRED = "Password is required",
   USERNAME_REQUIRED = "Username is required",
