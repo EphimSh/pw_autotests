@@ -6,6 +6,7 @@ import {
   IProductInTable,
 } from "test-data/consts/salesPortal/data/product/Product.type";
 import { MANUFACTURERS } from "test-data/consts/salesPortal/data/product/Manufacturers";
+import { DeleteProductModal } from "./DeleteProductModal.page";
 
 export class ProductsPage extends SalesPortalPage {
   protected readonly pageHeader = this.page.locator("h2.fw-bold");
@@ -13,13 +14,36 @@ export class ProductsPage extends SalesPortalPage {
     "a[name='add-button']"
   );
   protected readonly productsTable = this.page.locator("#table-products");
-  protected readonly getRowByName = (productName: string) =>
+  public readonly getRowByName = (productName: string) =>
     this.productsTable
       .locator("tr", {
         has: this.page.locator("td", { hasText: productName }),
       })
       .locator("td");
+
+  public readonly deleteModalWindow = new DeleteProductModal(this.page);
   protected uniqueElement: Locator = this.pageHeader;
+
+  protected readonly detailsButton = (productName: string) =>
+    this.getRowByName(productName).locator('button[title="Details"]');
+
+  protected readonly editButton = (productName: string) =>
+    this.getRowByName(productName).locator('button[title="Edit"]');
+
+  protected readonly deleteButton = (productName: string) =>
+    this.getRowByName(productName).locator('button[title="Delete"]');
+
+  public async clickDetailsButtonByProductName(productName: string) {
+    await this.detailsButton(productName).click();
+  }
+
+  public async clickEditButtonByProductName(productName: string) {
+    await this.editButton(productName).click();
+  }
+
+  public async clickDeleteButtonByProductName(productName: string) {
+    await this.deleteButton(productName).click();
+  }
 
   public async getProductByName(productName: string): Promise<IProductInTable> {
     const [name, price, manufacturer, createdOn] =
