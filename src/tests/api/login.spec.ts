@@ -3,7 +3,6 @@ import { credentials } from "config/env";
 import { loginSchema } from "consts/salesPortal/data/schemas/login/login.schema";
 import { USER_ROLES } from "consts/salesPortal/data/types/user/User.type";
 import test, { expect } from "playwright/test";
-import { validateJsonSchema } from "utils/validateJsonSchema.util";
 import { validateResponse } from "utils/validateResponse.util";
 const { baseURL, endpoints } = apiConfig;
 

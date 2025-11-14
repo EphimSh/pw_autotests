@@ -5,7 +5,6 @@ import _ from "lodash";
 import { generateProductData } from "consts/salesPortal/data/product/ProductDataGenerator";
 import { createProductSchema } from "consts/salesPortal/data/schemas/product/create.schema";
 import { STATUS_CODES } from "consts/salesPortal/data/statusCode";
-import { validateJsonSchema } from "utils/validateJsonSchema.util";
 import { validateResponse } from "utils/validateResponse.util";
 import { loginSchema } from "consts/salesPortal/data/schemas/login/login.schema";
 const { baseURL, endpoints } = apiConfig;
