@@ -26,7 +26,7 @@ test.describe("[API][Sales Portal]", () => {
     expect(response.status()).toBe(STATUS_CODES.DELETED);
   });
 
-  test("Product details", async ({ request }) => {
+  test("Create product", async ({ request }) => {
     const loginResponse = await request.post(baseURL + endpoints.login, {
       data: credentials,
       headers: {
