@@ -51,7 +51,8 @@ test.describe("[E2E][Sales Portal]", () => {
     await expect(productsPage.notification).toContainText(
       SUCCESS_MESSAGES.PRODUCT_ADDED
     );
-    await expect(productsPage.notification).toBeHidden({ timeout: 11000 });
+    await addProductPage.closeNotification();
+    await expect(productsPage.notification).toBeHidden();
     const { deleteModalWindow } = productsPage;
     await productsPage.clickDeleteButtonByProductName(newProduct.name);
     await deleteModalWindow.waitForOpened();

@@ -19,4 +19,8 @@ export abstract class SalesPortalPage extends BasePage {
   async open() {
     await this.page.goto(SALES_PORTAL_URL);
   }
+
+  async closeNotification() {
+    await this.notification.locator("xpath=/following-sibling::button").click();
+  }
 }
