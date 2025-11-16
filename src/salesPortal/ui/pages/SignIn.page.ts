@@ -1,6 +1,6 @@
 import { Locator } from "playwright/test";
 import { SalesPortalPage } from "./SalesPortalPage.page";
-import { ICredentials } from "test-data/consts/salesPortal/data/credentials/Credential.type";
+import { ICredentials } from "consts/salesPortal/data/types/credentials/Credential.type";
 
 export class SignInPage extends SalesPortalPage {
   uniqueElement: Locator = this.page.locator("form", {

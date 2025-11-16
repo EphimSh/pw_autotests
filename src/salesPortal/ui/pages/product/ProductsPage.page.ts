@@ -4,8 +4,8 @@ import { SALES_PORTAL_URL } from "config/env";
 import {
   IProduct,
   IProductInTable,
-} from "test-data/consts/salesPortal/data/product/Product.type";
-import { MANUFACTURERS } from "test-data/consts/salesPortal/data/product/Manufacturers";
+} from "consts/salesPortal/data/types/product/Product.type";
+import { MANUFACTURERS } from "consts/salesPortal/data/product/Manufacturers";
 import { DeleteProductModal } from "./DeleteProductModal.page";
 
 export class ProductsPage extends SalesPortalPage {
