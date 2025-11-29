@@ -27,3 +27,6 @@ export interface IProductFromResponse
 export interface IProductResponse extends IResponseFields {
   Product: IProductFromResponse;
 }
+export interface IProductsResponse extends IResponseFields {
+  Products: IProductFromResponse[];
+}
