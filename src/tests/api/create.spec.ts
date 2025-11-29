@@ -18,11 +18,19 @@ test.describe("[API][Sales Portal][Products]", () => {
     token = "";
   });
 
-  positive_CreateProductCases.forEach((caseData) => {
-    test(`${caseData.title}`, async ({ loginApiService, productsApi }) => {
-      token = await loginApiService.getToken(credentials);
-      const productData = generateProductData(caseData.productData);
-      const response = await productsApi.create(productData, token);
+  test("Create product", async ({ request }) => {
+    const loginResponse = await request.post(baseURL + endpoints.login, {
+      data: credentials,
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    validateResponse(loginResponse, {
+      status: 200,
+      schema: loginSchema,
+      IsSuccess: true,
+      ErrorMessage: null,
+    });
 
       validateResponse(response, {
         status: caseData.expectedStatus,
