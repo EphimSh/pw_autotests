@@ -3,7 +3,7 @@ import { URL } from "../../../consts/url/Url";
 import {
   IHerokuTablesUser,
   usersData,
-} from "consts/heroku-data-tables/HerokuTablesUser";
+} from "test-data/consts/heroku-data-tables/HerokuTablesUser";
 
 test.describe("[HEROKU] [DYNAMIC CONTROLS] [WAITS]", () => {
   test("", async ({ page }) => {
