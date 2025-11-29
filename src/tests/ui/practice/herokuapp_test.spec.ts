@@ -1,9 +1,9 @@
 import test, { expect, Page } from "@playwright/test";
-import { URL } from "../../test-data/consts/url/Url";
+import { URL } from "../../../consts/url/Url";
 import {
   IHerokuTablesUser,
   usersData,
-} from "test-data/consts/heroku-data-tables/HerokuTablesUser";
+} from "consts/heroku-data-tables/HerokuTablesUser";
 
 test.describe("[HEROKU] [DYNAMIC CONTROLS] [WAITS]", () => {
   test("", async ({ page }) => {

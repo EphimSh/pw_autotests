@@ -1,7 +1,7 @@
 import { credentials } from "config/env";
 import { expect, test } from "fixtures/pages.fixture";
-import { SUCCESS_MESSAGES } from "test-data/consts/salesPortal/data/notifications/Notifications";
-import { generateProductData } from "test-data/consts/salesPortal/data/product/ProductDataGenerator";
+import { SUCCESS_MESSAGES } from "consts/salesPortal/data/notifications/Notifications";
+import { generateProductData } from "consts/salesPortal/data/product/ProductDataGenerator";
 import _ from "lodash";
 
 test.describe("[E2E][Sales Portal]", () => {
@@ -51,7 +51,8 @@ test.describe("[E2E][Sales Portal]", () => {
     await expect(productsPage.notification).toContainText(
       SUCCESS_MESSAGES.PRODUCT_ADDED
     );
-    await expect(productsPage.notification).toBeHidden({ timeout: 11000 });
+    await addProductPage.closeNotification();
+    await expect(productsPage.notification).toBeHidden();
     const { deleteModalWindow } = productsPage;
     await productsPage.clickDeleteButtonByProductName(newProduct.name);
     await deleteModalWindow.waitForOpened();

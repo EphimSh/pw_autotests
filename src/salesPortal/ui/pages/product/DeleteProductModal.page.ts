@@ -6,12 +6,8 @@ export class DeleteProductModal extends SalesPortalPage {
 
   protected uniqueElement: Locator = this.modal.locator("h5.modal-title");
 
-  protected readonly deleteButton = this.modal.getByRole("button", {
-    name: "Yes, Delete",
-  });
-  protected readonly cancelButton = this.modal.getByRole("button", {
-    name: "Cancel",
-  });
+  protected readonly deleteButton = this.modal.locator("button.btn-danger");
+  protected readonly cancelButton = this.modal.locator("button.btn-secondary");
   protected readonly closeButton = this.modal.locator(".btn-close");
 
   public async clickDeleteButton() {
