@@ -11,3 +11,5 @@ node_modules/
 task.md
 lection*
 test-list.spec.ts
+
+.env

@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
-import { testPerson } from "test-data/consts/Person";
-import { URL } from "test-data/consts/url/Url";
+import { testPerson } from "consts/heroku-data-tables/Person";
+import { URL } from "consts/url/Url";
 
 test.describe("[SMOKE]", () => {
   test("Введенные значения отображаются в Registration Details", async ({

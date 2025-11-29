@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
-import { URL } from "../test-data/consts/url/Url";
-import { SUCCESS_MESSAGE } from "test-data/consts/notifications/Notifications";
+import { URL } from "../../../consts/url/Url";
+import { SUCCESS_MESSAGE } from "consts/demo-login-form/notifications/Notifications";
 
 test.describe("[DEMO-LOGIN-FORM] [LOCALSTORAGE-MANIPULATION]", () => {
   test("State-drop", async ({ page }) => {

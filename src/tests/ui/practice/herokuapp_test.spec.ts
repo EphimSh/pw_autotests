@@ -1,5 +1,5 @@
 import test, { expect, Page } from "@playwright/test";
-import { URL } from "../test-data/consts/url/Url";
+import { URL } from "../../../consts/url/Url";
 import {
   IHerokuTablesUser,
   usersData,

@@ -2,9 +2,9 @@ import test, { expect } from "@playwright/test";
 import {
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
-} from "test-data/consts/notifications/Notifications";
-import { testPerson } from "test-data/consts/Person";
-import { URL } from "test-data/consts/url/Url";
+} from "consts/demo-login-form/notifications/Notifications";
+import { testPerson } from "consts/heroku-data-tables/Person";
+import { URL } from "consts/url/Url";
 
 test.describe("[SMOKE]", () => {
   test.describe("[REGISTER-FORM]", () => {
@@ -20,7 +20,9 @@ test.describe("[SMOKE]", () => {
       await expect(registerFormHeader).toHaveText("Registration");
     });
 
-    test(`Error message appears '${ERROR_MESSAGE.PASSWORD_REQUIRED}' when register without password`, async ({ page }) => {
+    test(`Error message appears '${ERROR_MESSAGE.PASSWORD_REQUIRED}' when register without password`, async ({
+      page,
+    }) => {
       const errorMessage = page.locator("#errorMessageOnRegister");
       const userNameInput = page.locator("#userNameOnRegister");
       const switchToRegisterButton = page.locator(".button#registerOnLogin");
@@ -34,7 +36,9 @@ test.describe("[SMOKE]", () => {
       await expect(errorMessage).toHaveText(ERROR_MESSAGE.PASSWORD_REQUIRED);
     });
 
-    test(`Success message appears '${SUCCESS_MESSAGE.REGISTER_SUCCESS}' when register with valid data`, async ({ page }) => {
+    test(`Success message appears '${SUCCESS_MESSAGE.REGISTER_SUCCESS}' when register with valid data`, async ({
+      page,
+    }) => {
       const errorMessage = page.locator("#errorMessageOnRegister");
       const userNameInput = page.locator("#userNameOnRegister");
       const userPasswordInput = page.locator("#passwordOnRegister");
