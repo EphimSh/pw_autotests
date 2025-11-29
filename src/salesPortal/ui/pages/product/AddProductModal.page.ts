@@ -1,6 +1,6 @@
 import { Locator } from "playwright/test";
 import { SalesPortalPage } from "../SalesPortalPage.page";
-import { IProduct } from "test-data/consts/salesPortal/data/product/Product.type";
+import { IProduct } from "consts/salesPortal/data/types/product/Product.type";
 
 export class ProductModalPage extends SalesPortalPage {
   protected readonly title = this.page.locator("h2.page-title-text");
@@ -20,9 +20,9 @@ export class ProductModalPage extends SalesPortalPage {
   protected readonly notesInput = this.addNewProductForm.locator(
     "textarea#textareaNotes"
   );
-  protected readonly saveButton = this.addNewProductForm.getByRole("button", {
-    name: "Save New Product",
-  });
+  protected readonly saveButton = this.addNewProductForm.locator(
+    "button#save-new-product"
+  );
   protected readonly clearAllButton = this.addNewProductForm.locator(
     "button#clear-inputs"
   );
