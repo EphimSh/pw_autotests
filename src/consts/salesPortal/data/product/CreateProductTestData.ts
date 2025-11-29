@@ -2,6 +2,10 @@ import { faker } from "@faker-js/faker";
 import { IProduct } from "../types/product/Product.type";
 import { generateProductData } from "./ProductDataGenerator";
 import { STATUS_CODES } from "../statusCode";
+import {
+  createProductErrorSchema,
+  createProductSchema,
+} from "../schemas/product/create.schema";
 
 interface ICreateProductsCase {
   title: string;
@@ -9,7 +13,7 @@ interface ICreateProductsCase {
   expectedStatus: number;
   expectedMessage?: string | null;
   expectedIsSuccess?: boolean;
-  useAuth?: boolean;
+  expectedSchema?: object;
 }
 
 export const positive_CreateProductCases: ICreateProductsCase[] = [
@@ -21,6 +25,7 @@ export const positive_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.CREATED,
     expectedMessage: null,
     expectedIsSuccess: true,
+    expectedSchema: createProductSchema,
   },
   {
     title: "Create product with name containing single space and max length",
@@ -33,6 +38,7 @@ export const positive_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.CREATED,
     expectedMessage: null,
     expectedIsSuccess: true,
+    expectedSchema: createProductSchema,
   },
 ];
 
@@ -45,6 +51,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with name longer than 40 symbols",
@@ -54,6 +61,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with non alphanumeric symbols in name",
@@ -63,6 +71,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product when name has multiple spaces in a row",
@@ -72,6 +81,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product without name",
@@ -81,6 +91,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product without manufacturer",
@@ -90,6 +101,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with price below range",
@@ -99,6 +111,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with price above range",
@@ -108,6 +121,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with amount below range",
@@ -117,6 +131,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with amount above range",
@@ -126,6 +141,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product with notes longer than 250 characters",
@@ -135,6 +151,7 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
   {
     title: "Should not create product when notes contain prohibited symbols",
@@ -144,5 +161,6 @@ export const negative_CreateProductCases: ICreateProductsCase[] = [
     expectedStatus: STATUS_CODES.BAD_REQUEST,
     expectedMessage: "Incorrect request body",
     expectedIsSuccess: false,
+    expectedSchema: createProductErrorSchema,
   },
 ];

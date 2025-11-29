@@ -12,3 +12,11 @@ export const loginSchema = {
   },
   required: ["User", ...obligatoryRequiredFields],
 };
+
+export const loginErrorSchema = {
+  type: "object",
+  properties: {
+    ...obligatoryFieldsSchema,
+  },
+  required: [...obligatoryRequiredFields],
+};

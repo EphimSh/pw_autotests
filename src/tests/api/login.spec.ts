@@ -10,7 +10,6 @@ test.describe("[API][Sales Portal] Login", () => {
   positiveLoginCases.forEach((caseData) => {
     test(`${caseData.title}`, async ({ loginApi }) => {
       const response = await loginApi.login(caseData.credentials);
-
       validateResponse(response, {
         status: caseData.expectedStatus,
         IsSuccess: caseData.expectedIsSuccess!,
@@ -23,7 +22,6 @@ test.describe("[API][Sales Portal] Login", () => {
   negativeLoginCases.forEach((caseData) => {
     test(`${caseData.title}`, async ({ loginApi }) => {
       const response = await loginApi.login(caseData.credentials);
-
       validateResponse(response, {
         status: caseData.expectedStatus,
         IsSuccess: caseData.expectedIsSuccess!,

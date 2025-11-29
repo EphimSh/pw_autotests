@@ -1,8 +1,7 @@
 import { credentials } from "config/env";
 import { STATUS_CODES } from "../statusCode";
 import { ICredentials } from "../types/credentials/Credential.type";
-import { loginSchema } from "../schemas/login/login.schema";
-import { loginErrorSchema } from "../schemas/login/loginError.schema";
+import { loginSchema, loginErrorSchema } from "../schemas/login/login.schema";
 
 interface ILoginCase {
   title: string;

@@ -6,7 +6,6 @@ import {
   negative_CreateProductCases,
 } from "consts/salesPortal/data/product/CreateProductTestData";
 import { validateResponse } from "utils/validation/validateResponse.util";
-import { createProductSchema } from "consts/salesPortal/data/schemas/product/create.schema";
 import { credentials } from "config/env";
 
 test.describe("[API][Sales Portal][Products]", () => {
@@ -27,7 +26,7 @@ test.describe("[API][Sales Portal][Products]", () => {
 
       validateResponse(response, {
         status: caseData.expectedStatus,
-        schema: createProductSchema,
+        schema: caseData.expectedSchema!,
         IsSuccess: caseData.expectedIsSuccess!,
         ErrorMessage: caseData.expectedMessage!,
       });
@@ -48,6 +47,7 @@ test.describe("[API][Sales Portal][Products]", () => {
       validateResponse(response, {
         ErrorMessage: caseData.expectedMessage!,
         status: caseData.expectedStatus,
+        schema: caseData.expectedSchema!,
       });
     });
   });
