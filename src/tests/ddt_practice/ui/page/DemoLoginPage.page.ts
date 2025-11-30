@@ -51,9 +51,7 @@ export class DemoLoginPage extends BasePage {
   }
 
   async fillLoginForm(userdata: ICredentials) {
-    if (userdata.username)
-      await this.usernameInput.fill(userdata.username);
-    if (userdata.password)
-      await this.passwordInput.fill(userdata.password);
+    if (userdata.username) await this.usernameInput.fill(userdata.username);
+    if (userdata.password) await this.passwordInput.fill(userdata.password);
   }
 }

@@ -1,11 +1,11 @@
+import { LoginApi } from "salesPortal/api/api/login.api";
+import { ProductsApi } from "salesPortal/api/api/product.api";
+import { LoginService } from "salesPortal/service/login.service";
+import { ProductsApiService } from "salesPortal/service/products.service";
 import { test as base, expect } from "@playwright/test";
-import { RequestApi } from "../salesPortal/api/apiClients/requestApi";
-import { ProductsApi } from "../salesPortal/api/api/product.api";
-import { LoginApi } from "../salesPortal/api/api/login.api";
-import { LoginService } from "../salesPortal/service/login.service";
-import { ProductsApiService } from "../salesPortal/service/products.service";
+import { RequestApi } from "salesPortal/api/apiClients/requestApi";
 
-interface IApi {
+export interface IApi {
   // api
   productsApi: ProductsApi;
   loginApi: LoginApi;

@@ -21,4 +21,10 @@ export interface IResponse<T extends object | null> {
   body: T;
 }
 
+export interface ICase {
+  title: string;
+  expectedStatus?: number;
+  expectedErrorMessage?: string;
+}
+
 export type SortOrder = "asc" | "desc";
