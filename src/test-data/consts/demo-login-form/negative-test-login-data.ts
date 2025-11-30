@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../notifications/Notifications";
+import { ERROR_MESSAGE } from "./Notifications";
 
 export interface ICredentials {
   username: string;
@@ -9,10 +9,18 @@ export interface INegativeCredentialsData extends ICredentials {
   message: string;
 }
 export const negative_login_data: INegativeCredentialsData[] = [
-    {username: "", password: "testpassworD123", message: ERROR_MESSAGE.USERNAME_REQUIRED},
-    {username: "testUsername123", password: "", message: ERROR_MESSAGE.PASSWORD_REQUIRED},
-    {username: "", password: "", message: ERROR_MESSAGE.NO_CREDS_PROVIDED}
-]
+  {
+    username: "",
+    password: "testpassworD123",
+    message: ERROR_MESSAGE.USERNAME_REQUIRED,
+  },
+  {
+    username: "testUsername123",
+    password: "",
+    message: ERROR_MESSAGE.PASSWORD_REQUIRED,
+  },
+  { username: "", password: "", message: ERROR_MESSAGE.NO_CREDS_PROVIDED },
+];
 export const negative_register_credentials_data: INegativeCredentialsData[] = [
   {
     username: "Tes",
