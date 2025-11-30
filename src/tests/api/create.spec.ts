@@ -43,7 +43,6 @@ test.describe("[API][Sales Portal][Products]", () => {
     test(`${caseData.title}`, async ({ loginApiService, productsApi }) => {
       token = await loginApiService.getToken(credentials);
       const response = await productsApi.create(caseData.productData, token);
-      console.log(response);
       validateResponse(response, {
         ErrorMessage: caseData.expectedMessage!,
         status: caseData.expectedStatus,
