@@ -1,80 +1,33 @@
-import { apiConfig } from "config/apiConfig";
-import { credentials } from "config/env";
+import { test, expect } from "../../fixtures/api.fixture";
 import { generateProductData } from "consts/salesPortal/data/product/ProductDataGenerator";
-import { loginSchema } from "consts/salesPortal/data/schemas/login/login.schema";
-import { createProductSchema } from "consts/salesPortal/data/schemas/product/create.schema";
 import { getAllProductsSchema } from "consts/salesPortal/data/schemas/product/getAll.schema";
-import { STATUS_CODES } from "consts/salesPortal/data/statusCode";
 import _ from "lodash";
-import test, { expect } from "playwright/test";
-import { validateResponse } from "utils/validateResponse.util";
-const { baseURL, endpoints } = apiConfig;
+import { validateResponse } from "utils/validation/validateResponse.util";
+
 test.describe("[API][Sales Portal] Get products", () => {
   let id = "";
   let token = "";
 
-  test.afterEach(async ({ request }) => {
-    const response = await request.delete(
-      `${baseURL}${endpoints.products}/${id}`,
-      {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    expect(response.status()).toBe(STATUS_CODES.DELETED);
+  test.afterEach(async ({ productsApiService }) => {
+    await productsApiService.delete(token, id);
   });
 
   test("Created product should be in get all products response", async ({
-    request,
+    loginApiService,
+    productsApiService,
+    productsApi,
   }) => {
-    const loginResponse = await request.post(baseURL + endpoints.login, {
-      data: credentials,
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    validateResponse(loginResponse, {
-      status: 200,
-      schema: loginSchema,
-      IsSuccess: true,
-      ErrorMessage: null,
-    });
-
-    const headers = loginResponse.headers();
-    token = headers["authorization"]!;
-    expect.soft(token).toBeTruthy();
-
+    token = await loginApiService.getToken();
     const newProduct = generateProductData();
-    const createdProductResponse = await request.post(
-      baseURL + endpoints.products,
-      {
-        data: newProduct,
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
+
+    const createdProductResponse = await productsApiService.create(
+      token,
+      newProduct
     );
-    validateResponse(createdProductResponse, {
-      status: 201,
-      schema: createProductSchema,
-      IsSuccess: true,
-      ErrorMessage: null,
-    });
-    const createdProductBody = await createdProductResponse.json();
-    const actualProductData = createdProductBody.Product;
-    id = actualProductData._id;
 
-    const getAllProducts = await request.get(baseURL + endpoints.productsAll, {
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    id = createdProductResponse._id;
 
-    const getAllProductsBody = await getAllProducts.json();
+    const getAllProducts = await productsApi.getAll(token);
 
     validateResponse(getAllProducts, {
       status: 200,
@@ -83,8 +36,8 @@ test.describe("[API][Sales Portal] Get products", () => {
       ErrorMessage: null,
     });
 
-    expect(getAllProductsBody.Products).toContainEqual(
-      expect.objectContaining(_.omit(actualProductData, ["_id", "createdOn"]))
+    expect(getAllProducts).toContainEqual(
+      expect.objectContaining(_.omit(newProduct, ["_id", "createdOn"]))
     );
   });
 });

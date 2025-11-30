@@ -12,3 +12,10 @@ export const createProductSchema = {
   },
   required: ["Product", ...obligatoryRequiredFields],
 };
+
+export const createProductErrorSchema = {
+  type: "object",
+  properties: {
+    ...obligatoryFieldsSchema
+  }
+}

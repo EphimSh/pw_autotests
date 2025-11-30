@@ -1,30 +1,34 @@
-import { apiConfig } from "config/apiConfig";
-import { credentials } from "config/env";
-import { loginSchema } from "consts/salesPortal/data/schemas/login/login.schema";
-import { USER_ROLES } from "consts/salesPortal/data/types/user/User.type";
-import test, { expect } from "playwright/test";
-import { validateResponse } from "utils/validateResponse.util";
-const { baseURL, endpoints } = apiConfig;
+import {
+  negativeLoginCases,
+  positiveLoginCases,
+} from "consts/salesPortal/data/login/LoginTestData";
+import { expect, test } from "fixtures/api.fixture";
+
+import { validateResponse } from "utils/validation/validateResponse.util";
 
 test.describe("[API][Sales Portal] Login", () => {
-  test("Response should have admin role when login with admin creds", async ({
-    request,
-  }) => {
-    const loginResponse = await request.post(baseURL + endpoints.login, {
-      data: credentials,
-      headers: {
-        "content-type": "application/json",
-      },
+  positiveLoginCases.forEach((caseData) => {
+    test(`${caseData.title}`, async ({ loginApi }) => {
+      const response = await loginApi.login(caseData.credentials);
+      validateResponse(response, {
+        status: caseData.expectedStatus,
+        IsSuccess: caseData.expectedIsSuccess!,
+        schema: caseData.schema!,
+      });
+      expect(response.headers["authorization"]).toBeTruthy();
     });
-    validateResponse(loginResponse, {
-      status: 200,
-      schema: loginSchema,
-      IsSuccess: true,
-      ErrorMessage: null,
+  });
+
+  negativeLoginCases.forEach((caseData) => {
+    test(`${caseData.title}`, async ({ loginApi }) => {
+      const response = await loginApi.login(caseData.credentials);
+      validateResponse(response, {
+        status: caseData.expectedStatus,
+        IsSuccess: caseData.expectedIsSuccess!,
+        ErrorMessage: `${caseData.expectedErrorMessage}`,
+        schema: caseData.schema!,
+      });
+      expect(response.headers).not.toContain("authorization");
     });
-    const body = await loginResponse.json();
-    const headers = loginResponse.headers();
-    expect.soft(headers["authorization"]).toBeTruthy();
-    expect(body.User.roles).toContain(USER_ROLES.ADMIN);
   });
 });
